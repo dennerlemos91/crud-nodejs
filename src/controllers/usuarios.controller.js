@@ -35,7 +35,6 @@ const save = async (req, res, next) => {
 const update = async (req, res, next) => {
   try {
     const usuario = await usuariosService.update(req);
-    console.log(usuario);
     res.send(usuario);
     return next();
   } catch (error) {
