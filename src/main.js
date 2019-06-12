@@ -10,7 +10,8 @@ const port = process.env.PORT || 3000;
 mongoose.connect(
   config.database,
   {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useFindAndModify: false
   },
   () => {
     console.log('Conexão com banco realizada com sucesso!!');

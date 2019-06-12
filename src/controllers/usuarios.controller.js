@@ -34,11 +34,22 @@ const save = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-  } catch (error) {}
+    const usuario = await usuariosService.update(req);
+    console.log(usuario);
+    res.send(usuario);
+    return next();
+  } catch (error) {
+    res.status(400).send({
+      message: 'Error ao tentar atualizar.'
+    });
+  }
 };
 
 const remove = async (req, res, next) => {
   try {
+    const usuario = await usuariosService.remove(req.params.id);
+    res.send(usuario);
+    return next();
   } catch (error) {}
 };
 
