@@ -3,9 +3,9 @@ const config = require('./config/app.config');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const router = require('express').Router();
-
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 const app = express();
-const port = process.env.PORT || 3000;
 
 mongoose.connect(
   config.database,
@@ -14,7 +14,11 @@ mongoose.connect(
     useFindAndModify: false
   },
   () => {
-    console.log('Conexão com banco realizada com sucesso!!');
+    console.log('Successfully connected database!');
+  },
+  err => {
+    console.error('Failed to connect to database', err);
+    process.exit();
   }
 );
 
@@ -25,13 +29,10 @@ app.use(
   })
 );
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api', router);
 app.use('/api', require('./routes/index.js'));
 
-app.listen(port, () => {
-  console.log(`Servidor ouvindo na porta ${port}`);
+app.listen(config.port, () => {
+  console.log(`Server is running on: htto://localhost:${config.port}`);
 });
-
-module.exports = {
-  router
-};

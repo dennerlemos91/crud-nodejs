@@ -1,0 +1,268 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "CRUD NodeJs",
+    "description": "Criação de um crud simples utilizando o nodejs"
+  },
+  "host": "localhost:3000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Usuários",
+      "description": "API para os usuários do sistema"
+    },
+    {
+      "name": "Agências",
+      "description": "API para os agências do sistema"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/usuarios": {
+      "post": {
+        "tags": ["Usuários"],
+        "description": "Cria um novo usuário",
+        "parameters": [
+          {
+            "name": "usuario",
+            "in": "body",
+            "description": "Insere um novo usuário na base de dados",
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Novo usuários criado!",
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Usuários"],
+        "summary": "Lista todos os usuários",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Recursos que necessitam do _id",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Usuários"],
+        "summary": "Busca um usuário pelo identificador _id",
+        "responses": {
+          "200": {
+            "description": "Usuário encontrado",
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            }
+          },
+          "404": {
+            "description": "Usuário não encontrado"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remove um usuário pelo id",
+        "tags": ["Usuários"],
+        "responses": {
+          "200": {
+            "description": "Usuário removido",
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualiza um usuário informado o id na url",
+        "tags": ["Usuários"],
+        "parameters": [
+          {
+            "name": "usuario",
+            "in": "body",
+            "description": "No corpo da requisção a informações a serem alteradas",
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário atualizado",
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            }
+          }
+        }
+      }
+    },
+    "/agencias": {
+      "post": {
+        "tags": ["Agências"],
+        "description": "Cria uma nova agência",
+        "parameters": [
+          {
+            "name": "agencia",
+            "in": "body",
+            "description": "Insere uma nova agência na base de dados",
+            "schema": {
+              "$ref": "#/definitions/Agencia"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Nova agência criada!",
+            "schema": {
+              "$ref": "#/definitions/Agencia"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Agências"],
+        "summary": "Lista todas as agências",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Agencia"
+            }
+          }
+        }
+      }
+    },
+    "/agencias/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Recursos de agências que necessitam do _id",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Agências"],
+        "summary": "Busca uma agencia pelo identificador _id",
+        "responses": {
+          "200": {
+            "description": "Agência encontrada",
+            "schema": {
+              "$ref": "#/definitions/Agencia"
+            }
+          },
+          "404": {
+            "description": "Agência não encontrado"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remove uma agência pelo id",
+        "tags": ["Agências"],
+        "responses": {
+          "200": {
+            "description": "Agência removida",
+            "schema": {
+              "$ref": "#/definitions/Agencia"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualiza uma agência informado o id na url",
+        "tags": ["Agências"],
+        "parameters": [
+          {
+            "name": "usuario",
+            "in": "body",
+            "description": "No corpo da requisção a informações a serem alteradas",
+            "schema": {
+              "$ref": "#/definitions/Agencia"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agência atualizado",
+            "schema": {
+              "$ref": "#/definitions/Agencia"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Usuario": {
+      "required": ["_id"],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "nome": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "email": {
+          "type": "string"
+        },
+        "cep": {
+          "type": "string"
+        },
+        "banco": {
+          "type": "string"
+        },
+        "agencia": {
+          "type": "number"
+        },
+        "conta": {
+          "type": "number"
+        }
+      }
+    },
+    "Agencia": {
+      "required": ["_id"],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "banco": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "agencia": {
+          "type": "number"
+        },
+        "endereco": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}
